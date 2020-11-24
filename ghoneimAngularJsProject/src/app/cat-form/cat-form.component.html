@@ -1,0 +1,28 @@
+<main>
+  <header class="bg-primary">
+    <a routerLink="" class="btn btn-primary back-btn"><i class="fa fa-caret-left mr-2"></i>Back</a>
+    <h1 class="text-white text-center p-3">Cat card app</h1>
+  </header>
+  <section class="container">
+    <h2>Cat card form</h2>
+    <hr />
+    <h3 id="formError" class="text-center text-danger d-none"></h3>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group row">
+        <label for="cardTitle" class="col-sm-2 col-form-label">Card title</label>
+        <input type="text" required class="form-control col-sm-10" id="cardTitle" placeholder="Card title" formControlName="cardTitle">
+      </div>
+      <div class="form-group row">
+        <label for="cardImage" class="col-sm-2 col-form-label">Card image</label>
+        <input type="text" required class="form-control col-sm-10" id="cardImage" placeholder="Card image" formControlName="cardImage">
+      </div>
+      <div class="form-group row">
+        <label for="cardDescription" class="col-sm-2 col-form-label">Card description</label>
+        <textarea class="form-control col-sm-10" id="cardDescription" formControlName="Description"></textarea>
+      </div>
+      <div class="form-group d-flex flex-row-reverse">
+        <input type="submit" class="btn btn-primary" value="Add"/>
+      </div>
+    </form>
+    </section>
+</main>
