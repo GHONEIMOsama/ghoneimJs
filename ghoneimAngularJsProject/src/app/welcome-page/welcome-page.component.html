@@ -7,7 +7,23 @@
     <hr />
     <div class="card-group">
       <ng-container *ngFor="let card of getInitialCards">
-        <span>{{card.title}}</span>
+        <div class="flipper mb-3">
+          <div class="front card text-center shadow-sm">
+            <img class="card-img-top" src="{{card.imageUrl}}" alt="Cat image" width="250" height="200"/>
+            <div class="card-body">
+              <h5 class="card-title">{{card.title}}</h5>
+            </div>
+          </div>
+          <div class="back card text-center shadow-sm">
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{card.title}}</h6>
+              <p class="card-text">{{card.description}}</p>
+            </div>
+            <div class="card-footer">
+              <a routerLink="catForm" [queryParams]="{cardId: card.id}" class="btn btn-primary card-link">Edit that cat</a>
+            </div>
+          </div>
+        </div>
       </ng-container>
     </div>
     <a class="btn btn-lg btn-danger circle add" routerLink="catForm" ><i class="fa fa-plus"></i></a>

@@ -7,6 +7,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { CatFormComponent } from './cat-form/cat-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRouteSnapshot } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ActivatedRouteSnapshot
   ],
   providers: [],
   bootstrap: [AppComponent]

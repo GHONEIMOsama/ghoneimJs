@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card, WelcomePageComponent } from '../welcome-page/welcome-page.component';
 
 @Component({
@@ -12,7 +12,7 @@ export class CatFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.form = this.formBuilder.group({
       cardTitle: [, Validators.required],
       cardImage: [, Validators.required],
