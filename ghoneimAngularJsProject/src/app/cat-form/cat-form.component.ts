@@ -11,6 +11,7 @@ import { Card, WelcomePageComponent } from '../welcome-page/welcome-page.compone
 export class CatFormComponent implements OnInit {
 
   form: FormGroup;
+  cardId: number;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) {
     this.form = this.formBuilder.group({
@@ -18,25 +19,53 @@ export class CatFormComponent implements OnInit {
       cardImage: [, Validators.required],
       cardDescription: []
     });
+    this.cardId = -1;
    }
 
   ngOnInit(): void {
-    
+    this.route.queryParams.subscribe(params => {
+      if (params.cardId != null) {
+        this.cardId = params.cardId;
+        const card = this.getCardWithId(params.cardId);
+        this.form.controls.cardTitle.setValue(card?.title);
+        this.form.controls.cardImage.setValue(card?.imageUrl);
+        this.form.controls.cardDescription.setValue(card?.description);
+      }
+    });
   }
 
   submit(): void {
+    if (this.cardId == -1) {
+      this.addCard()
+    } else {
+      this.updateCard();
+    }
+    this.router.navigate(['']);
+  }
+
+  private addCard(): void {
     WelcomePageComponent.initialCards.push({
       id: this.generateId(),
       title: this.form.controls.cardTitle.value,
       imageUrl: this.form.controls.cardImage.value,
       description: this.form.controls.cardDescription.value
     });
-    this.router.navigate(['']);
+  }
+
+  private updateCard(): void {
+    const index = WelcomePageComponent.initialCards.findIndex((card: Card) => card.id == this.cardId);
+    WelcomePageComponent.initialCards[index].title = this.form.controls.cardTitle.value;
+    WelcomePageComponent.initialCards[index].imageUrl = this.form.controls.cardImage.value;
+    WelcomePageComponent.initialCards[index].description = this.form.controls.cardDescription.value;
   }
 
   private generateId(): number {
     const ids: number[] = WelcomePageComponent.initialCards.map((card: Card) => card.id);
     return Math.max(...ids) + 1;
+  }
+
+  private getCardWithId(cardId: number): Card | undefined {
+    return  WelcomePageComponent.initialCards.find((card: Card) => card.id == cardId);
   }
 
 }
